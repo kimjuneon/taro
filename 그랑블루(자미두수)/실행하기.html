@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>그랑블루</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bolder;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-weight: bolder;
+            background-color: black;
+        }
+        select {
+            background-color: yellow;
+            width: 200px;
+            height: 30px;
+            font-weight: bolder;
+            font-size: 20px;
+            z-index: 1000;
+        }
+        option {
+            background-color: yellow;
+            font-weight: bolder;
+            font-size: 20px;
+            z-index: 1000;
+        }
+        header {
+            height: 100px;
+            background-color: darkgrey;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bolder;
+            position: -webkit-sticky; /* For Safari */
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+
+        }
+        #main {
+            text-align: center;
+            margin-top: 30px;
+            position: relative;
+        }
+        button {
+            background-color: yellow;
+            display: block;
+            width: 90px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        #button {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        span{
+            background-color: white;
+            font-size: 20px;
+
+        }
+        .menu3_back{
+            background-image:url(img/4_back.jpg);
+            height:1000px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .menu4_back{
+            background-image:url(img/5_back.jpg);
+            height:1000px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .main_back{
+            background-image:url(img/main_back.png);
+            height:1100px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        img{
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>자미두수 타로</header>
+    <form style="float: left;">
+        <select id="choice" style="background-color: yellow;" name="그랑블루">
+            <option style="background-color: yellow">그랑블루</option>
+            <option style="background-color: yellow">1. 3카드 배열법</option>
+            <option style="background-color: yellow">2. 4카드 배열법</option>
+            <option style="background-color: yellow">3. 월운을 보는 배열법</option>
+            <option style="background-color: yellow">4. 열두하우스 활용 1년 운세 배열법</option>
+            <option style="background-color: yellow">5. 양자택일 배열법1</option>
+            <option style="background-color: yellow">6. 양자택일 배열법2</option>
+            <option style="background-color: yellow">7. 다중택일 배열법</option>
+            <option style="background-color: yellow">8. 시간순 배열법</option>
+            <option style="background-color: yellow">9. 6장 데일리 배열법</option>
+            <option style="background-color: yellow">10. 4장 데일리 배열법</option>
+            <option style="background-color: yellow">11. 관계 배열법</option>
+            <option style="background-color: yellow">12. 18장 데일리 배열법</option>
+            <option style="background-color: yellow">13. 말발굽 배열법</option>
+            <option style="background-color: yellow">14. 금전운 배열법</option>
+            <option style="background-color: yellow">15. 매직세븐 배열법</option>
+            <option style="background-color: yellow">16. 매직세븐 배열법 변형</option>
+            <option style="background-color: yellow">17. 박스 배열법</option>
+            <option style="background-color: yellow">18. 분기별 배열법</option>
+            <option style="background-color: yellow">19. 속마음 배열법</option>
+            <option style="background-color: yellow">20. 약식켈틱 배열법</option>
+            <option style="background-color: yellow">21. 켈틱크로스</option>
+            <option style="background-color: yellow">22. 피라미드 배열법</option>
+            <option style="background-color: yellow">23. 페르소나 배열법</option>
+            <option style="background-color: yellow">24. 12사항궁 배열법</option>
+        </select>
+    </form>
+    <form>
+        <select id="choice_mode" style="background-color: #C9C9FF" name="그랑블루">
+            <option value="0" style="background-color: #C9C9FF">1. 전체 70장</option>
+            <option value="1" style="background-color: #C9C9FF">2. 사화12장 제외</option>
+            <option value="2" style="background-color: #C9C9FF">3. 사화12장</option>
+        </select>
+    </form>
+    <div id="main"></div>
+    <script type="text/javascript">
+        $("#main").addClass('main_back');
+        $("#main").html("<div style='width:2000px; position:relative; margin:60px auto auto auto;'><a href='https://www.youtube.com/@grandblue3471/' target='_blank' style='background-color:#77DD77;font-size:30px;position:absolute; top:630px;left:1440px;'>유튜브 채널로 이동하기</a></div>");
+        var colorArr = ["#FFB7C5","#FFDAC1","#C9C9FF","#77DD77"]; 
+        var indexa = 0;
+        setInterval(function() {
+            indexa = (indexa + 1) % colorArr.length; // 0, 1, 2, 3 순환
+            $("a").css("background-color", colorArr[indexa]);
+        }, 500);
+
+        var cardMode = 0;
+
+        function Random(count, maxNumber) {
+            const result = [];
+            const usedNumbers = new Set();
+            var randomNumber;
+            while (result.length < count) {
+                if(cardMode == 0){
+                    randomNumber = Math.floor(Math.random() * maxNumber);
+                }else if(cardMode == 1){//1234
+                    randomNumber = Math.floor(Math.random() * 58);
+                }else if(cardMode == 2 && count < 13){
+
+                    randomNumber = 58+Math.floor(Math.random() * 12);
+                }else{
+                    alert("카드 장 수가 필요한 카드 장 수보다 적습니다.");
+                        return;
+                }
+                //1234
+
+                if (!usedNumbers.has(randomNumber)) {
+                    result.push(randomNumber);
+                    usedNumbers.add(randomNumber);
+                }
+            }
+
+            return result;
+        }
+//47 58
+        function Random_24(count, maxNumber) {//1111
+            const result = [];
+            const usedNumbers = new Set();
+            var randomNumber;
+            while (result.length < count) {
+                if(cardMode == 0){
+                    randomNumber = Math.floor(Math.random() * maxNumber);
+                }else if(cardMode == 1){//1234
+                    randomNumber = Math.floor(Math.random() * 58);
+                }else if(cardMode == 2 && count < 13){
+
+                    randomNumber = 58+Math.floor(Math.random() * 12);
+                }else{
+                    alert("카드 장 수가 필요한 카드 장 수보다 적습니다.");
+                        return;
+                }
+                //1234
+
+                if (!usedNumbers.has(randomNumber) && (randomNumber < 46||randomNumber>57)) {
+                    result.push(randomNumber);
+                    usedNumbers.add(randomNumber);
+                }
+            }
+
+            return result;
+        }
+
+        var menu_mode = $("#choice_mode");
+        menu_mode.change(function(){
+            cardMode = 0;
+            const num = menu_mode.prop('selectedIndex');
+            cardMode = num;
+            const num123 = menu.prop('selectedIndex');
+            const functionName = `menu${num123 - 1}`;
+            if (typeof window[functionName] === "function") {
+                window[functionName]();
+            }
+
+        })
+
+        const menu = $("#choice");
+        const img = [];
+        for (let i = 1; i <= 70; i++) {
+            img.push(`img/jami%20card%20(${i}).png`);
+        }
+
+        function Random_12(count) {
+            const result_12 = [];
+            const usedNumbers_12 = new Set();
+
+            while (result_12.length < count) {
+                const randomNumber_12 = Math.floor(Math.random() * 12)+59;
+
+                if (!usedNumbers_12.has(randomNumber_12)) {
+                    result_12.push(randomNumber_12);
+                    usedNumbers_12.add(randomNumber_12);
+                }
+            }
+
+            return result_12;
+        }
+
+        const menu_12 = $("#choice");
+        const img_12 = [];
+        for (let i = 1; i <= 70; i++) {
+            img_12.push(`img/jami%20card%20(${i}).png`);
+        }
+
+        menu.change(function () {
+            $("#main").html('');
+            $("header").html('<div style="display:inline-block; vertical-align: middle; margin-top:0px;">자미두수 타로('+(menu.val()).slice(3)+')</div>');
+            $("header").append('<div id="button" style="display:inline-block; vertical-align: middle; margin-top:0"><img src="img/buttonImg.png" width="100px" id="shuffleButton"></img></div>');
+
+            $("#main").removeClass('main_back');
+            $("#main").removeClass('menu3_back');
+            $("#main").removeClass('menu4_back');
+            const num = menu.prop('selectedIndex');
+            if(num == 0){
+                $("#main").addClass("main_back");
+                $("#main").html("<div style='width:2000px; position:relative; margin:60px auto auto auto;'><a href='https://www.youtube.com/@grandblue3471/' target='_blank' style='background-color:#FFB7C5;font-size:30px;position:absolute; top:630px;left:1440px;'>유튜브 채널로 이동하기</a></div>");
+                $("header").html('<div style="display:inline-block; vertical-align: middle; margin-top:0px;">자미두수 타로('+(menu.val())+')</div>');
+            }
+            const functionName = `menu${num - 1}`;
+            if (typeof window[functionName] === "function") {
+                window[functionName]();
+            }
+        });
+
+        function displayImages(indices) {
+            let html = "";
+            var i = 0;
+            indices.forEach(index => {
+                i++;
+                if (index >= 0 && index < img.length) {
+                    html += `<img src="${img[index]}" width="200px" style="display: none;"/>`;
+                }
+            });
+            $("#main").html(html);
+            
+            // 이미지 서서히 나타내기
+            $("#main img").each(function(index) {
+                $(this).delay(100 * index).fadeIn(400);
+            });
+            $("#shuffleButton").off('click');
+
+            $("#shuffleButton").click(() => {
+                const newIndices = Random(indices.length, 70);
+                displayImages(newIndices);
+            });
+        }
+
+        function displayImages_ppp(indices) {
+
+            let html = "";
+            var i = 0;
+            indices.forEach(index => {
+                i++;
+                if (index >= 0 && index < img.length) {
+                    html += `<img src="${img[index]}" width="150px" style="display: none;"/>`;
+                }
+            });
+            $("#main").append(html);
+            
+            // 이미지 서서히 나타내기
+            $("#main img").each(function(index) {
+                $(this).delay(100 * (index-12)).fadeIn(400);
+            });
+            $("#shuffleButton").off('click');
+
+            $("#shuffleButton").click(() => {
+                menu23();
+            });
+        }
+
+        function displayImages_pp(indices) {
+            $("#shuffleButton").off('click').on('click', menu11);
+
+            let html = "";
+            var i = 0;
+            indices.forEach(index => {
+                i++;
+                if (index >= 0 && index < img.length) {
+                    html += `<img src="${img[index]}" width="200px" style="display: none;"/>`;
+                }
+                if(i == 9)
+                        html += '<br/><br/><br/><br/><br/>';
+            });
+            $("#main").html(html);
+            
+            // 이미지 서서히 나타내기
+            $("#main img").each(function(index) {
+                $(this).delay(100 * index).fadeIn(400);
+            });
+            
+        }
+
+        function menu0() {
+            displayImages(Random(3, 70));
+        }
+
+        function menu1() {
+            displayImages(Random(4, 70));
+        }
+
+        function menu2() {
+            const indices = Random(12, 70);
+                let html = `
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">12월</span>
+                    <img class="fade-image" src="${img[indices[3]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">11월</span>
+                    <img class="fade-image" src="${img[indices[0]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">10월</span>
+                    <img class="fade-image" src="${img[indices[1]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">9월</span>
+                    <img class="fade-image" src="${img[indices[2]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <br/>
+                <div style="display: inline-block;">
+                    <span style="display: block;">1월</span>
+                    <img class="fade-image" src="${img[indices[5]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">8월</span>
+                    <img class="fade-image" src="${img[indices[4]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <br/>
+                <div style="display: inline-block;">
+                    <span style="display: block;">2월</span>
+                    <img class="fade-image" src="${img[indices[7]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <img class="fade-image" src="img/black.png" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">7월</span>
+                    <img class="fade-image" src="${img[indices[6]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <br/>
+                <div style="display: inline-block;">
+                    <span style="display: block;">3월</span>
+                    <img class="fade-image" src="${img[indices[9]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">4월</span>
+                    <img class="fade-image" src="${img[indices[10]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">5월</span>
+                    <img class="fade-image" src="${img[indices[11]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <div style="display: inline-block;">
+                    <span style="display: block;">6월</span>
+                    <img class="fade-image" src="${img[indices[8]]}" width="130px" style="opacity: 0;"/>
+                </div>
+                <br/>
+            `;
+
+            $("#main").html(html);
+            $("#main").addClass('menu2_back');
+
+            // 이미지들을 fadeIn 효과와 함께 보여주기
+            $(".fade-image").each(function(index) {
+                $(this).animate({ "opacity": "1" }, 600);
+            });
+
+            $("#shuffleButton").off('click').on('click', menu2);
+
+        }
+
+
+        function menu3() {
+            const indices = Random(12, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:284px; left: -103px">
+                        <img class="fade-image" src="${img[indices[0]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:508px; left: -103px">
+                        <img class="fade-image" src="${img[indices[1]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:60px; left: 21px">
+                        <img class="fade-image" src="${img[indices[2]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:726px; left: 24px">
+                        <img class="fade-image" src="${img[indices[3]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:841px; left: 241px">
+                        <img class="fade-image" src="${img[indices[4]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:-68px; left: 243px">
+                        <img class="fade-image" src="${img[indices[5]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:-71px; left: 443px">
+                        <img class="fade-image" src="${img[indices[6]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:284px; left: 803px">
+                        <img class="fade-image" src="${img[indices[7]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:508px; left: 803px">
+                        <img class="fade-image" src="${img[indices[8]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:725px; left: 676px">
+                        <img class="fade-image" src="${img[indices[9]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:842px; left: 455px">
+                        <img class="fade-image" src="${img[indices[10]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:55px; left: 670px">
+                        <img class="fade-image" src="${img[indices[11]]}" width="130px" style="display:none;"/>
+                    </div>
+
+                </div>
+            `;
+            $("#main").html(html);
+            $("#main").addClass('menu3_back');
+
+            $(".fade-image").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+
+            $("#shuffleButton").off('click').on('click', menu3);
+
+        }
+
+        function menu4() {
+            $("#main").html(`
+                <div id="pp" style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div id="button" style='display: inline-block; position: absolute; top:866px; left:107px;'>
+                        <button id="shuffleButton1" style='width: 260px; height:104px; border-radius:20px; font-size: 30px'>선택 A</button>
+                    </div>
+                    <div id="button" style='display: inline-block; position: absolute; top:866px; left:422px;'>
+                        <button id="shuffleButton2" style='width: 260px; height:104px; border-radius:20px; font-size: 30px'>선택 B</button>
+                    </div>
+
+                </div>
+            `);
+
+            const indices = Random(6, 70);
+            let html = `
+                <div style="display: inline-block; position: absolute; top:8px; left: -28px">
+                    <img class="fade-image" src="${img[indices[0]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+                <div style="display: inline-block;position: absolute; top:301px; left: 69px">
+                    <img class="fade-image" src="${img[indices[1]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+                <div style="display: inline-block;position: absolute; top:599px; left: 162px">
+                    <img class="fade-image" src="${img[indices[2]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+            `;
+
+            let html2 = `
+                <div style="display: inline-block;position: absolute; top:599px; left: 429px">
+                    <img class="fade-image" src="${img[indices[3]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+                <div style="display: inline-block;position: absolute; top:6px; left: 630px">
+                    <img class="fade-image" src="${img[indices[4]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+                <div style="display: inline-block;position: absolute; top:299px; left: 530px">
+                    <img class="fade-image" src="${img[indices[5]]}" width="210px" height="290px" style="display:none;"/>
+                </div>
+            `;
+
+            $("#main").addClass('menu4_back');
+
+            $("#shuffleButton1").click(function() {
+                $("#pp").append(html);
+                $(".fade-image").each(function() {
+                    $(this).on('load', function() {
+                        $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                    }).each(function() {
+                        if (this.complete) $(this).trigger('load');
+                    });
+                });
+            });
+
+            $("#shuffleButton2").click(function() {
+                $("#pp").append(html2);
+                $(".fade-image").each(function() {
+                    $(this).on('load', function() {
+                        $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                    }).each(function() {
+                        if (this.complete) $(this).trigger('load');
+                    });
+                });
+            });
+
+            $("#shuffleButton").off('click').on('click', menu4);
+
+        }
+
+        function menu5() {
+            $("#main").html(`
+                <div id="pp" style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div id="button" style='display: inline-block; position: absolute; top:228px; left:72px;'>
+                        <button id="shuffleButton1" style='width: 200px; height:74px; border-radius:20px; font-size: 30px'>선택 A</button>
+                    </div>
+                    <div id="button" style='display: inline-block; position: absolute; top:228px; left:531px;'>
+                        <button id="shuffleButton2" style='width: 200px; height:74px; border-radius:20px; font-size: 30px'>선택 B</button>
+                    </div>
+
+
+                    <div id="button" style='display: inline-block; position: absolute; top:598px; left:304px;'>
+                        <button id="shuffleButton3" style='width: 200px; height:74px; border-radius:20px; font-size: 30px'>현상황</button>
+                    </div>
+                </div>
+            `);
+
+            const indices = Random(9, 70);
+            let html1 = `
+                <div style="display: inline-block; position: absolute; top:8px; left: -28px">
+                    <img class="fade-image" src="${img[indices[0]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[1]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[2]]}" width="130px" height="201px" style="display:none;"/>
+                </div>
+            `;
+
+            let html2 = `
+                <div style="display: inline-block;position: absolute; top:8px; left: 429px; width: 401.25px">
+                    <img class="fade-image" src="${img[indices[3]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[4]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[5]]}" width="130px" height="201px" style="display:none;"/>
+                </div>
+            `;
+
+            let html3 = `
+                <div style="display: inline-block;position: absolute; top:409px; left: 204px">
+                    <img class="fade-image" src="${img[indices[6]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[7]]}" width="130px" height="201px" style="display:none;"/>
+                    <img class="fade-image" src="${img[indices[8]]}" width="130px" height="201px" style="display:none;"/>
+                </div>
+            `;
+
+            $("#shuffleButton1").click(function(){
+                $("#pp").append(html1);
+                $(".fade-image").each(function() {
+                    $(this).on('load', function() {
+                        $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                    }).each(function() {
+                        if (this.complete) $(this).trigger('load');
+                    });
+                });
+            });
+
+            $("#shuffleButton2").click(function(){
+                $("#pp").append(html2);
+                $(".fade-image").each(function() {
+                    $(this).on('load', function() {
+                        $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                    }).each(function() {
+                        if (this.complete) $(this).trigger('load');
+                    });
+                });
+            });
+
+            $("#shuffleButton3").click(function(){
+                $("#pp").append(html3);
+                $(".fade-image").each(function() {
+                    $(this).on('load', function() {
+                        $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                    }).each(function() {
+                        if (this.complete) $(this).trigger('load');
+                    });
+                });
+            });
+
+            $("#shuffleButton").off('click').on('click', menu5);
+
+        }
+
+        // 전역 변수로 사용할 Set을 선언하여 중복된 이미지를 추적합니다.
+        const usedIndices = new Set();
+        let selectedImageIndexes = [];
+
+        // Random 함수를 기반으로 한 새로운 RandomUnique 함수 정의
+        function RandomUnique(count, maxNumber) {
+            const result = [];
+            const usedNumbers = new Set();
+
+            while (result.length < count) {
+                if(cardMode == 0){
+                    randomNumber = Math.floor(Math.random() * maxNumber);
+                }else if(cardMode == 1){//1234
+                    randomNumber = Math.floor(Math.random() * 58);
+                }else if(cardMode == 2 && count < 13){
+
+                    randomNumber = 58+Math.floor(Math.random() * 12);
+                }else{
+                    alert("카드 장 수가 필요한 카드 장 수보다 적습니다.");
+                        return;
+                }
+                //1234
+
+                if (!usedNumbers.has(randomNumber) && !selectedImageIndexes.includes(randomNumber)) {
+                    result.push(randomNumber);
+                    usedNumbers.add(randomNumber);
+                }
+            }
+
+            // 선택된 이미지 인덱스 배열에 추가합니다.
+            selectedImageIndexes = selectedImageIndexes.concat(result);
+
+            return result;
+        }
+
+
+        function menu6() {
+            $("#shuffleButton")
+            .off('click')
+            .on('click',function(){
+                situationCounter = 1;
+                selectedImageIndexes = [];
+                $(".situationContainer").remove();
+                menu6();
+            });
+            menu_mode.change(function(){
+                situationCounter = 1;
+                selectedImageIndexes = [];
+                $(".situationContainer").remove();
+            });
+            $("#main").html(`
+                <div id="pp" style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div id="addButton" style='display: inline-block; position: absolute; top:-20px; left:700px; z-index: 1;'>
+                        <button id="addSituationButton" style='width: 150px; height:54px; border-radius:20px; font-size: 20px;'>상황 추가</button>
+                    </div>
+                </div>
+            `);
+
+            var situationCounter = 1; // 상황 추가 버튼 클릭 횟수를 추적하기 위한 변수
+            $("#addSituationButton").off('click').click(function () {
+                if(situationCounter >= 24 && cardMode == 0){
+                    alert("더 이상 추가할 수 없습니다.(카드 개수 제한)");
+                    return;
+                }
+                if(situationCounter >= 20 && cardMode == 1){
+                    alert("더 이상 추가할 수 없습니다.(카드 개수 제한)");
+                    return;
+                }
+                if(situationCounter >= 5 && cardMode == 2){
+                    alert("더 이상 추가할 수 없습니다.(카드 개수 제한)");
+                    return;
+                }
+                // 중복되지 않는 랜덤한 숫자를 이용하여 이미지 선택
+                const randomIndexes = RandomUnique(3, 70);
+                let newHtml = `
+                    <div class="situationContainer" style="position: relative; margin-top: 20px;">
+                        <button class="situationButton" style='width: 150px; height: 50px; border-radius: 10px; font-size: 16px; z-index: 2;'>선택 ${String.fromCharCode(situationCounter + 64)}</button>
+                        <div class="situationImages" style="display: none; z-index: 1;">
+                            <img class="situationImage" src="${img[randomIndexes[0]]}" width="130px" height="201px" style="display:none;"/>
+                            <img class="situationImage" src="${img[randomIndexes[1]]}" width="130px" height="201px" style="display:none;"/>
+                            <img class="situationImage" src="${img[randomIndexes[2]]}" width="130px" height="201px" style="display:none;"/>
+                        </div>
+                    </div>
+                `;
+                $("#pp").append(newHtml);
+
+                // 상황 버튼을 클릭하면 이미지를 표시하도록 처리
+                $(".situationButton").last().click(function () {
+                    $(this).next(".situationImages").toggle();
+                    // 이미지를 fadeIn 효과로 표시
+                    $(this).next(".situationImages").find("img").each(function() {
+                        $(this).on('load', function() {
+                            $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                        }).each(function() {
+                            if (this.complete) $(this).trigger('load');
+                        });
+                    });
+                });
+
+                situationCounter++; // 상황 버튼 카운터 증가
+            });
+        }
+
+
+        function menu7() {
+            let html = "";
+            var i = 0;
+            var tmp;
+            var indices = Random(3, 70);
+            indices.forEach(index => {
+                if (index >= 0 && index < img.length) {
+                    if (i == 0)
+                        tmp = "과거";
+                    else if (i == 1)
+                        tmp = "현재";
+                    else if (i == 2)
+                        tmp = "미래";
+                    html += `<div style='display:inline-block;'>
+                                <img id="img${i}" src="${img[index]}" width="200px" style="display:none;"/>
+                                <div style='background-color:`+colorArr[i]+`; margin: 1px; height: 30px; line-height:30px; font-size:20px;'>${tmp}</div>
+                             </div>`;
+                    i++;
+                }
+            });
+            $("#main").html(html);
+
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+
+            $("#shuffleButton").off('click').on('click', menu7);
+
+        }
+
+
+       function menu8() {
+            const indices = Random(6, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:45px; left: 326px">
+                        <div style='background-color:white;'>
+                        중요 테마</div>
+                        <img id="img0" src="${img[indices[0]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:524px; left: 329px">
+                        <img id="img1" src="${img[indices[1]]}" width="130px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        힌트</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:173px; left: 163px">
+                        <img id="img2" src="${img[indices[2]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:400px; left: 164px">
+                        <img id="img3" src="${img[indices[3]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:173px; left: 495px">
+                        <img id="img4" src="${img[indices[4]]}" width="130px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:400px; left: 495px">
+                        <img id="img5" src="${img[indices[5]]}" width="130px" style="display:none;"/>
+                    </div>
+                    
+                    </div>
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+
+            $("#shuffleButton").off('click').on('click', menu8);
+        }
+
+
+        function menu9() {
+            const indices = Random(4, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:45px; left: 326px">
+                        <div style='background-color:white;'>
+                        중요 테마</div>
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:308px; left: 328px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        힌트</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:174px; left: 163px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:174px; left: 492px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                    </div>
+                    
+    
+                    </div>
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu9);
+
+        }
+
+        function menu10() {
+            const indices = Random(5, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:15px; left: 326px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        상대가 나를 보는 관점</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:568px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        내가 상대를 보는 관점</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:294px; left: 148px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        조언</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:294px; left: 327px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:295px; left: 502px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        현재상황</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu10);
+
+        }
+
+        function menu11(){
+            displayImages_pp(Random(18, 70));
+        }
+
+        function menu12() {
+            const indices = Random(6, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:15px; left: 326px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        진행상항</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:218px; left: 148px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        주변상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 58px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        나의 상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:215px; left: 502px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        방해요인</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:499px; left: 588px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        해결방법(조언,참고)</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu12);
+
+        }
+
+        function menu13() {
+            const indices = Random(5, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block;position: absolute; top:290px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        장애물</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:8px; left: 57px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        현재상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:290px; left: 58px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        들어올 돈</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:5px; left: 587px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:290px; left: 588px">
+                        <img id="img3" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        돈 벌 능력 유무</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu13);
+
+        }
+
+        function menu14() {
+            const indices = Random(7, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:115px; left: 141px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        상대방,주변환경</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:563px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        조언</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:394px; left: 148px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        미래</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:115px; left: 501px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        장애물</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:395px; left: 502px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        현재</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top: -8px; left: 325px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        과거</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:278px; left: 325px">
+                        <img id="img3" src="${img[indices[6]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu14);
+
+        }
+
+        function menu15() {
+            const indices = Random(7, 70);
+            let html = '<div style="gap: 5px; margin:60px auto auto auto;">';
+            var i = 0;
+            var arr = ["과거","현재","미래","조언","상대방, 주변환경","장애물", "결과"];
+
+            indices.forEach((index, i) => {
+                if (index >= 0 && index < img.length) {
+                    if(i == 0 || i == 1 || i == 2){
+                    html += `
+                        <div style="position: relative; width: 160px; height: 265px; display: inline-block; padding: auto auto auto auto;">
+                            <img src="${img[index]}" width="150px" style="display: none;"/>
+                            <div style="background-color:white; display:inline-block; width: 150px; margin:0px auto 0px auto">`+arr[i]+`</div>
+                        </div>`;
+                        if(i == 2 || i == 5)
+                            html += '<br/><br/><br/>';
+                        i++;
+                    }else{
+                        html += `
+                        <div style="position: relative; width: 160px; height: 238px; display: inline-block; padding: 0 auto auto auto">
+                            <img src="${img[index]}" width="150px" style="display: none;"/>
+                            <div style="background-color:white; display:inline-block; width: 150px; margin:0px auto 0px auto">`+arr[i]+`</div>
+                        </div>`;
+                        if(i == 2 || i == 5)
+                            html += '<br/><br/><br/>';
+                        i++;
+                    }
+                }
+            });
+            html += '</div>';
+            $("#main").html(html);
+            
+            // 이미지 서서히 나타내기
+            $("#main img").each(function(index) {
+                $(this).delay(100 * index).fadeIn(400);
+            });
+
+            // 카드 셔플 버튼 클릭 핸들러
+            $("#shuffleButton").off('click');
+
+            $("#shuffleButton").click(() => {
+                const newIndices = Random(indices.length, 70);
+                menu15(newIndices);
+            });
+
+            // 가까운 미래 버튼 클릭 핸들러
+            var i1 = 0;
+            var i2 = 0;
+            $("#nearFutureButton").click(() => {
+                if(i1 == 0){
+                    highlightImages([2, 7, 9], 'black');
+                    highlightImages([1, 3, 8], 'yellow');
+                    i1 = 1;
+                    i2 = 0;
+                }
+                else{
+                    highlightImages([1, 3, 8], 'black');
+                    i1 = 0;
+                }
+            });
+
+            // 먼 미래 버튼 클릭 핸들러
+            $("#farFutureButton").click(() => {
+                if(i2 == 0){
+                    highlightImages([1, 3, 8], 'black');
+                    highlightImages([2, 7, 9], 'red');
+                    i2 = 1;
+                    i1 = 0;
+                }else{
+                    highlightImages([2, 7, 9], 'black');
+                    i2 = 0;
+                }
+            });
+        }
+
+        // 이미지를 강조하는 함수
+        function highlightImages(indices, color) {
+            indices.forEach(index => {
+                const imgDiv = $("#main div").eq(index);
+                imgDiv.css({
+                    'border': `5px solid ${color}`,
+                    'box-sizing': 'border-box'
+                });
+            });
+        }
+
+        function menu16() {
+            const indices = Random(9, 70);
+            let html = '<div style="gap: 5px; margin:60px auto auto auto;">';
+            var i = 0;
+            var arr = ["과거","현재","미래"];
+
+            indices.forEach((index, i) => {
+                if (index >= 0 && index < img.length) {
+                    if(i == 0 || i == 1 || i == 2){
+                    html += `
+                        <div style="position: relative; width: 160px; height: 265px; display: inline-block; padding: auto auto auto auto;">
+                            <span style="background-color:`+colorArr[i]+`; display:inline-block; width: 150px; margin:0px auto 0px auto">`+arr[i]+`</span>
+                            <img src="${img[index]}" width="150px" style="display: none;"/>
+                        </div>`;
+                        if(i == 2 || i == 5)
+                            html += '<br/><br/><br/>';
+                        i++;
+                    }else{
+                        html += `
+                        <div style="position: relative; width: 160px; height: 238px; display: inline-block; padding: 0 auto auto auto">
+                            <img src="${img[index]}" width="150px" style="display: none;"/>
+                        </div>`;
+                        if(i == 2 || i == 5)
+                            html += '<br/><br/><br/>';
+                        i++;
+                    }
+                }
+            });
+            html += '</div>';
+            html += '<div id="button"><button id="nearFutureButton">가까운 미래</button><button id="farFutureButton" style="background-color:red; color:white">먼 미래</button></div>';
+            $("#main").html(html);
+            
+            // 이미지 서서히 나타내기
+            $("#main img").each(function(index) {
+                $(this).delay(100 * index).fadeIn(400);
+            });
+
+            // 카드 셔플 버튼 클릭 핸들러
+            $("#shuffleButton").off('click');
+
+            $("#shuffleButton").click(() => {
+                const newIndices = Random(indices.length, 70);
+                menu16(newIndices);
+            });
+
+            // 가까운 미래 버튼 클릭 핸들러
+            var i1 = 0;
+            var i2 = 0;
+            $("#nearFutureButton").click(() => {
+                if(i1 == 0){
+                    highlightImages([2, 7, 9], 'black');
+                    highlightImages([1, 3, 8], 'yellow');
+                    i1 = 1;
+                    i2 = 0;
+                }
+                else{
+                    highlightImages([1, 3, 8], 'black');
+                    i1 = 0;
+                }
+            });
+
+            // 먼 미래 버튼 클릭 핸들러
+            $("#farFutureButton").click(() => {
+                if(i2 == 0){
+                    highlightImages([1, 3, 8], 'black');
+                    highlightImages([2, 7, 9], 'red');
+                    i2 = 1;
+                    i1 = 0;
+                }else{
+                    highlightImages([2, 7, 9], 'black');
+                    i2 = 0;
+                }
+            });
+        }
+
+        // 이미지를 강조하는 함수
+        function highlightImages(indices, color) {
+            indices.forEach(index => {
+                const imgDiv = $("#main div").eq(index);
+                imgDiv.css({
+                    'border': `5px solid ${color}`,
+                    'box-sizing': 'border-box'
+                });
+            });
+        }
+
+        function menu17(){
+            $("#shuffleButton").off('click').on('click', menu17);
+
+            const indices = Random(16, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block;">
+                        <div style="display: inline-block; 
+                        float: left; background-color: `+colorArr[0]+`; height:228.32px; line-height: 228.32px; top: 0; margin-right:5px; font-size:20px;">1분기</div>
+                        <img src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <img src="img/black.png" width="100px" style="opacity: 0;"/>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                    </div>
+
+                    <br/><br/><br/><br/>
+
+                    <div style="display: inline-block;">
+                        <div style="display: inline-block; 
+                        float: left; background-color: `+colorArr[1]+`; height:228.32px; line-height: 228.32px; top: 0; margin-right:5px;font-size:20px;">2분기</div>
+                        <img src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[6]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <img src="img/black.png" width="100px" style="opacity: 0;"/>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[7]]}" width="150px" style="display:none;"/>
+                    </div>
+
+                    <br/><br/><br/><br/>
+
+                    <div style="display: inline-block;">
+                        <div style="display: inline-block; 
+                        float: left; background-color: `+colorArr[2]+`; height:228.32px; line-height: 228.32px; top: 0; margin-right:5px;font-size:20px;">3분기</div>
+                        <img src="${img[indices[8]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[9]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[10]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <img src="img/black.png" width="100px" style="opacity: 0;"/>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[11]]}" width="150px" style="display:none;"/>
+                    </div>
+
+                    <br/><br/><br/><br/>
+
+                    <div style="display: inline-block;">
+                        <div style="display: inline-block; 
+                        float: left; background-color: `+colorArr[3]+`; height:228.32px; line-height: 228.32px; top: 0; margin-right:5px;font-size:20px;">4분기</div>
+                        <img src="${img[indices[12]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[13]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[14]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <img src="img/black.png" width="100px" style="opacity: 0;"/>
+                    <div style="display: inline-block;">
+                        <img src="${img[indices[15]]}" width="150px" style="display:none;"/>
+                    </div>
+                    <br/><br/><br/>
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+        }
+
+        function menu18(){
+            const indices = Random(10, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style='width:150px; height:253.09px; background-color: `+colorArr[2]+`; top:271px; left:-233px; display:inline-block; position: absolute; line-height:253.09px; font-size: 30px;'>남자</div>
+                    <div style='width:150px; height:253.09px; background-color: `+colorArr[0]+`; top:278px; left:644px; display:inline-block; position: absolute; line-height:253.09px; font-size: 30px;'>여자</div>
+                    <div style="display: inline-block; position: absolute; top:271px; left: -408px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        감추는 비밀</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:548px; left: -233px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        내적요인</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:274px; left: -63px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        조언</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:-10px; left: -233px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        외적상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:553px; left: 646px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        내적요인</div>
+
+                    </div>
+                    <div style="display: inline-block;position: absolute; top: -8px; left: 646px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        외적상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:274px; left: 121px">
+                        <img id="img3" src="${img[indices[6]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:278px; left: 478px">
+                        <img id="img3" src="${img[indices[7]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        감추는 비밀</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:278px; left: 991px">
+                        <img id="img3" src="${img[indices[8]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:278px; left: 807px">
+                        <img id="img3" src="${img[indices[9]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        조언</div>
+                    </div>
+
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu18);
+
+        }
+
+        function menu19() {
+            const indices = Random(7, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:414px; left: 318px; z-index:1">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        방해요인</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:687px; left: 228px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        무의식, 두려움</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:277px; left: 48px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        과거</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:277px; left: 661px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        최종결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:277px; left: 485px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        미래</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top: -8px; left: 225px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        이성 (머리로 판단)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:277px; left: 226px">
+                        <div style='background-color:white;'>
+                        질문자의 현재상황</div>
+                        <img id="img3" src="${img[indices[6]]}" width="150px" style="display:none;"/>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu19);
+
+        }
+
+        function menu20() {
+            const indices = Random(10, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:404px; left: 318px; z-index:1">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        방해요인</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:677px; left: 228px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        무의식 (내면)상황</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:327px; left: 48px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        과거</div>
+                    </div>
+
+
+                    <div style="display: inline-block;position: absolute; top:-53px; left: 661px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        최종결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:205px; left: 661px">
+                        <img id="img3" src="${img[indices[7]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        두려움 (무의식)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:462px; left: 661px">
+                        <img id="img3" src="${img[indices[8]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        객관적 관점 (제 3자)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:720px; left: 661px">
+                        <img id="img3" src="${img[indices[9]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        주관적 관점(질문자)</div>
+                    </div>
+
+
+                    <div style="display: inline-block;position: absolute; top:327px; left: 485px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        미래</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top: 58px; left: 225px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        이성 (머리로 판단)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:327px; left: 226px">
+                        <div style='background-color:white;'>
+                        질문자의 현재상황</div>
+                        <img id="img3" src="${img[indices[6]]}" width="150px" style="display:none;"/>
+                    </div>
+
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu20);
+
+        }
+
+
+        function menu21() {
+            const indices = Random(6, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:15px; left: 326px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        최종 결과</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        상대 (주변상황)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:218px; left: 148px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        문제점 (장애물)</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 58px">
+                        <img src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        나</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:215px; left: 502px">
+                        <img src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        문제해결 방법</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:499px; left: 588px">
+                        <img src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:white;'>
+                        현재 상황</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu21);
+
+        }
+
+        function menu22() {
+            const indices = Random(6, 70);
+            let html = `
+                <div style="width:800px; margin:60px auto auto auto; position:relative">
+                    <div style="display: inline-block; position: absolute; top:15px; left: 326px">
+                        <img id="img0" src="${img[indices[0]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[0]+`;'>
+                        페르소나</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 323px">
+                        <img id="img1" src="${img[indices[1]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[1]+`;'>
+                        그림자</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:218px; left: 148px">
+                        <img id="img2" src="${img[indices[2]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[2]+`;'>
+                        에고</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:500px; left: 58px">
+                        <img id="img3" src="${img[indices[3]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[1]+`;'>
+                        그림자</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:215px; left: 502px">
+                        <img id="img3" src="${img[indices[4]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[2]+`;'>
+                        에고</div>
+                    </div>
+                    <div style="display: inline-block;position: absolute; top:499px; left: 588px">
+                        <img id="img3" src="${img[indices[5]]}" width="150px" style="display:none;"/>
+                        <div style='background-color:`+colorArr[1]+`;'>
+                        그림자</div>
+                    </div>
+                    
+                </div>
+            `;
+            $("#main").html(html);
+            
+            // 이미지에 fadeIn 효과 적용
+            $("img").each(function() {
+                $(this).on('load', function() {
+                    $(this).fadeIn(1000); // 1000ms 동안 fadeIn
+                }).each(function() {
+                    if (this.complete) $(this).trigger('load');
+                });
+            });
+            
+            $("#shuffleButton").off('click').on('click', menu22);
+
+        }
+
+        function menu23(){
+            var pp = '<div id="play"style="margin:60px auto auto auto; position:relative"></div>';
+            $("#main").html(pp);
+            for(var i = 46; i < 58; i++){
+                $("#play").append(`<img src="${img[i]}" width="150px" />`);
+            }
+            $("#play").append('<br/><br/><br/><br/><br/>');
+            displayImages_ppp(Random_24(12, 70));//1111
+        }
+
+    </script>
+</body>
+</html>
